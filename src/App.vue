@@ -1,7 +1,7 @@
 <template>
-  <div class="p-10">
-    <RouterView />
-  </div>
+    <div class="p-10">
+        <RouterView />
+    </div>
 </template>
 
 <script setup>
@@ -11,24 +11,36 @@ import liff from '@line/liff'
 import { useUserStore } from './stores/user'
 import { Button } from '@/components/ui/button'
 import { ChevronLeft } from 'lucide-vue-next'
+import { createUser, getUser } from '@/utils/api'
 
 const userStore = useUserStore()
 const errorMessage = ref('')
 
 onMounted(async () => {
-  try {
-    await liff.init({ liffId: import.meta.env.VITE_LIFF_ID })
+    try {
+        await liff.init({ liffId: import.meta.env.VITE_LIFF_ID })
 
-    if (!liff.isLoggedIn()) {
-      liff.login()
-    } else {
-      const profile = await liff.getProfile()
-      userStore.user = profile
+        if (!liff.isLoggedIn()) {
+            liff.login()
+        } else {
+            const profile = await liff.getProfile()
+            userStore.user = profile
+
+            // const user = await getUser(profile.userId)
+
+            // const { userId, displayName } = profile
+
+            // if (!user.data.data.length) {
+            //     await createUser({
+            //         userId,
+            //         displayName
+            //     })
+            // }
+        }
+    } catch (error) {
+        errorMessage.value = '無法取得使用者資訊'
+        console.error(error)
     }
-  } catch (error) {
-    errorMessage.value = '無法取得使用者資訊'
-    console.error(error)
-  }
 })
 </script>
 
