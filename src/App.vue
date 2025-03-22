@@ -1,6 +1,9 @@
 <template>
     <div class="p-10">
         <RouterView />
+        <div>
+            {{ userStore.user }}
+        </div>
     </div>
 </template>
 
@@ -38,11 +41,13 @@ onMounted(async () => {
         await liff.init({ liffId: import.meta.env.VITE_LIFF_ID, withLoginOnExternalBrowser: true })
 
         if (!liff.isLoggedIn()) {
+            console.log('!liff.isLoggedIn()')
             liff.login()
             const profile = await liff.getProfile()
             userStore.user = profile
             handleGetUserApi(profile)
         } else {
+            console.log('liff.isLoggedIn()')
             const profile = await liff.getProfile()
             userStore.user = profile
             handleGetUserApi(profile)
