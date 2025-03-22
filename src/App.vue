@@ -18,7 +18,7 @@ const errorMessage = ref('')
 
 onMounted(async () => {
     try {
-        await liff.init({ liffId: import.meta.env.VITE_LIFF_ID })
+        await liff.init({ liffId: import.meta.env.VITE_LIFF_ID, withLoginOnExternalBrowser: true })
 
         if (!liff.isLoggedIn()) {
             liff.login()
@@ -26,16 +26,16 @@ onMounted(async () => {
             const profile = await liff.getProfile()
             userStore.user = profile
 
-            // const user = await getUser(profile.userId)
+            const user = await getUser(profile.userId)
 
-            // const { userId, displayName } = profile
+            const { userId, displayName } = profile
 
-            // if (!user.data.data.length) {
-            //     await createUser({
-            //         userId,
-            //         displayName
-            //     })
-            // }
+            if (!user.data.data.length) {
+                await createUser({
+                    userId,
+                    displayName
+                })
+            }
         }
     } catch (error) {
         errorMessage.value = '無法取得使用者資訊'
