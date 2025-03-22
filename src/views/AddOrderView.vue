@@ -50,7 +50,6 @@
             <LoadingIcon v-if="isLoading" class="animate-spin" />
         </div>
     </Form>
-    <div>{{ errorMessage }}</div>
 </template>
 <script setup>
 import { Form, Field } from 'vee-validate'

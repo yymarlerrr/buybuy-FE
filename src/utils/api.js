@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -7,15 +8,16 @@ const api = axios.create({
     }
 })
 
-// api.interceptors.request.use((config) => {
-//     return config
-// })
-
 api.interceptors.response.use(
     (response) => {
         return response
     },
     (error) => {
+        Swal.fire({
+            icon: 'error',
+            title: '發生錯誤',
+            text: error.response.data.message
+        })
         return Promise.reject(error)
     }
 )

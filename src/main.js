@@ -24,8 +24,6 @@ import router from './router'
 const pinia = createPinia()
 pinia.use(piniaPersist)
 
-const liffId = import.meta.env.VITE_LIFF_ID
-
 const app = createApp(App)
 
 app.use(pinia)

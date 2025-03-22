@@ -14,14 +14,11 @@ import { ChevronLeft } from 'lucide-vue-next'
 import { createUser, getUser } from '@/utils/api'
 
 const userStore = useUserStore()
-const errorMessage = ref('')
 
 const handleGetUserApi = async (profile) => {
     try {
         const user = await getUser(profile.userId)
-
         const { userId, displayName } = profile
-
         if (!user.data.data.length) {
             await createUser({
                 userId,
@@ -47,7 +44,6 @@ onMounted(async () => {
             handleGetUserApi(profile)
         }
     } catch (error) {
-        errorMessage.value = '無法取得使用者資訊'
         console.error(error)
     }
 })
