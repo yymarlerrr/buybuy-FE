@@ -16,27 +16,33 @@ import { createUser, getUser } from '@/utils/api'
 const userStore = useUserStore()
 const errorMessage = ref('')
 
+const handleGetUserApi = async (userId) => {
+    try {
+        const user = await getUser(userId)
+
+        const { userId, displayName } = profile
+
+        if (!user.data.data.length) {
+            await createUser({
+                userId,
+                displayName
+            })
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 onMounted(async () => {
     try {
         await liff.init({ liffId: import.meta.env.VITE_LIFF_ID, withLoginOnExternalBrowser: true })
 
-        if (!liff.isLoggedIn()) {
-            liff.login()
-        } else {
-            const profile = await liff.getProfile()
-            userStore.user = profile
+        liff.login()
+        const profile = await liff.getProfile()
 
-            const user = await getUser(profile.userId)
+        userStore.user = profile
 
-            const { userId, displayName } = profile
-
-            if (!user.data.data.length) {
-                await createUser({
-                    userId,
-                    displayName
-                })
-            }
-        }
+        handleGetUserApi(profile.userId)
     } catch (error) {
         errorMessage.value = '無法取得使用者資訊'
         console.error(error)
