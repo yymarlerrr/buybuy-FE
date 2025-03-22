@@ -16,9 +16,9 @@ import { createUser, getUser } from '@/utils/api'
 const userStore = useUserStore()
 const errorMessage = ref('')
 
-const handleGetUserApi = async (userId) => {
+const handleGetUserApi = async (profile) => {
     try {
-        const user = await getUser(userId)
+        const user = await getUser(profile.userId)
 
         const { userId, displayName } = profile
 
@@ -39,18 +39,13 @@ onMounted(async () => {
 
         if (!liff.isLoggedIn()) {
             liff.login()
-
             const profile = await liff.getProfile()
-
             userStore.user = profile
-
-            handleGetUserApi(profile.userId)
+            handleGetUserApi(profile)
         } else {
             const profile = await liff.getProfile()
-
             userStore.user = profile
-
-            handleGetUserApi(profile.userId)
+            handleGetUserApi(profile)
         }
     } catch (error) {
         errorMessage.value = '無法取得使用者資訊'
