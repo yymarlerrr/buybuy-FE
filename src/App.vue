@@ -1,9 +1,6 @@
 <template>
     <div class="p-10">
         <RouterView />
-        <div>
-            {{ userStore.user }}
-        </div>
     </div>
 </template>
 

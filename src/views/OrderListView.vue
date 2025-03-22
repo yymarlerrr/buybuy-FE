@@ -19,7 +19,6 @@
             </TableHead>
         </Table>
     </main>
-    <div>{{ errorMessage }}</div>
 </template>
 <script setup>
 import { Button } from '@/components/ui/button'
@@ -35,8 +34,6 @@ const isLoading = ref(false)
 
 const orderList = ref([])
 
-const errorMessage = ref(null)
-
 onMounted(async () => {
     try {
         isLoading.value = true
@@ -46,7 +43,6 @@ onMounted(async () => {
         }
     } catch (error) {
         console.log(error)
-        errorMessage.value = error
     } finally {
         isLoading.value = false
     }

@@ -65,7 +65,6 @@ import { useRouter } from 'vue-router'
 
 const userStore = useUserStore()
 const router = useRouter()
-const errorMessage = ref(null)
 
 const isLoading = ref(false)
 
@@ -132,7 +131,6 @@ const handleSubmit = async () => {
         }
     } catch (error) {
         console.log(error)
-        errorMessage.value = error
     } finally {
         isLoading.value = false
     }
