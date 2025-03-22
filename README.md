@@ -1,6 +1,49 @@
-# buybuy
+# 專案簡介
 
-This template should help get you started developing with Vue 3 in Vite.
+主要 Vue3 + TailwindCSS + Vite 開發的 Line 訂單系統，利用 shadcn/vue 套件來建立 UI 元件，讓使用者可以在 Line 上進行訂單的建立及查看。
+
+## 專案架構
+
+```sh
+my-vue-app/
+├── node_modules/
+├── public/
+│   ├── b.jpg
+├── src/
+│   ├── assets/
+│   │   └── main.css
+│   ├── components/
+│   │   └── icons
+│   │   └── ui
+│   ├── lib/
+│   │   └── utils.js
+│   ├── router/
+│   │   └── index.js
+│   ├── stores/
+│   │   └── user.js
+│   ├── utils/
+│   │   └── api.js
+│   ├── views/
+│   │   └── AddOrderView.vue
+│   │   └── OrderView.vue
+│   │   └── HomeView.vue
+│   ├── App.vue
+│   ├── main.js
+├── .gitignore
+├── .env
+├── .prettierrc.json
+├── eslint.config.js
+├── components.json
+├── index.html
+├── jsonconfig.json
+├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── README.md
+├── tailwind.config.js
+└── vite.config.js
+
+```
 
 ## Recommended IDE Setup
 
@@ -13,7 +56,7 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 ## Project Setup
 
 ```sh
-npm install
+npm ci
 ```
 
 ### Compile and Hot-Reload for Development
@@ -32,4 +75,11 @@ npm run build
 
 ```sh
 npm run lint
+```
+
+## env 設定
+
+```sh
+VITE_API_URL=https://buybuy-be-production.up.railway.app
+VITE_LIFF_ID=2007085677-AY2mR3rN
 ```
