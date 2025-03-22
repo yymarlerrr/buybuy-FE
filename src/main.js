@@ -26,14 +26,6 @@ pinia.use(piniaPersist)
 
 const liffId = import.meta.env.VITE_LIFF_ID
 
-liff.init({ liffId })
-    .then(() => {
-        console.log('LIFF init success')
-    })
-    .catch((err) => {
-        console.error('LIFF init failed', err)
-    })
-
 const app = createApp(App)
 
 app.use(pinia)

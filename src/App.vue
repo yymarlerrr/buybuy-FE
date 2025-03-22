@@ -43,9 +43,6 @@ onMounted(async () => {
         if (!liff.isLoggedIn()) {
             console.log('!liff.isLoggedIn()')
             liff.login()
-            const profile = await liff.getProfile()
-            userStore.user = profile
-            handleGetUserApi(profile)
         } else {
             console.log('liff.isLoggedIn()')
             const profile = await liff.getProfile()
