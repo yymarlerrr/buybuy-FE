@@ -37,12 +37,21 @@ onMounted(async () => {
     try {
         await liff.init({ liffId: import.meta.env.VITE_LIFF_ID, withLoginOnExternalBrowser: true })
 
-        liff.login()
-        const profile = await liff.getProfile()
+        if (!liff.isLoggedIn()) {
+            liff.login()
 
-        userStore.user = profile
+            const profile = await liff.getProfile()
 
-        handleGetUserApi(profile.userId)
+            userStore.user = profile
+
+            handleGetUserApi(profile.userId)
+        } else {
+            const profile = await liff.getProfile()
+
+            userStore.user = profile
+
+            handleGetUserApi(profile.userId)
+        }
     } catch (error) {
         errorMessage.value = '無法取得使用者資訊'
         console.error(error)
