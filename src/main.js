@@ -2,7 +2,7 @@ import './assets/main.css'
 import liff from '@line/liff'
 
 import { defineRule } from 'vee-validate'
-import { required, max } from '@vee-validate/rules'
+import { required, max, min, integer } from '@vee-validate/rules'
 
 import piniaPersist from 'pinia-plugin-persistedstate'
 
@@ -12,6 +12,14 @@ defineRule('required', (value) => {
 })
 defineRule('max', (value, max) => {
     if (value > max) return `此欄位不能超過 ${max} 人`
+    return true
+})
+defineRule('min', (value, min) => {
+    if (value < min) return `此欄位不能小於 ${min} 人`
+    return true
+})
+defineRule('integer', (value) => {
+    if (!Number.isInteger(value)) return '此欄位必須為整數'
     return true
 })
 

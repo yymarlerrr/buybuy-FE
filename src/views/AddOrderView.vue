@@ -29,7 +29,7 @@
             <Field
                 name="participantNumber"
                 v-slot="{ field, errorMessage }"
-                :rules="{ max: 10, required: true }"
+                :rules="{ max: 10, required: true, min: 1, integer: true }"
                 @input="selected.participantNumber = $event.target.value"
             >
                 <Input
